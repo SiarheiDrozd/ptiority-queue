@@ -2,7 +2,7 @@ const Node = require('./node');
 
 class MaxHeap {
 	constructor() {
-		
+		//some text
 	}
 
 	push(data, priority) {
