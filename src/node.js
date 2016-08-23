@@ -79,47 +79,6 @@ class Node {
 				this.right = bufferNode;
 				this.left = nodeParent;
 			}
-
-//V3
-/*
-			nodeGrandParent.removeChild(nodeParent);
-			nodeGrandParent.appendChild(this);
-
-			if(nodeGrandParent.left == nodeParent){
-				nodeGrandParent.left = this;
-			}else{
-				nodeGrandParent.right = this;
-			}
-			this.parent.left = this.left; // set parents left to current left
-			this.parent.right = this.right; //set parents right to current right
-			this.parent.parent = this; //set current node as parent to it
-
-			this.left = nodeParent.left; //
-			this.right = nodeParent;
-			this.parent = nodeGrandParent;*/
-//V1
-/*
-			var bufferNode = this.parent;
-
- 			this.parent.data = this.data;
-			this.parent.priority = this.priority;
-
-			this.data = bufferNode.data;
-			this.priority = bufferNode.priority;*/
-//V2
-/*
-			var grandParent = this.parent.parent; // saving parent's parent
-			var currentParent = this.parent; // saving parent
-
-			this.appendChild(currentParent); // adding current parent as child node
-			currentParent.parent = this; //setting current node as parent to new child
-
-			grandParent.removeChild(currentParent); // removing current parent node
-			grandParent.appendChild(this); // adding current node as child to grandparent
-
-			this.parent = grandParent; //setting grandParent as current parent
-*/
-
 		}
 	}
 }
