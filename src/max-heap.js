@@ -5,27 +5,24 @@ class MaxHeap {
 		this.root = null; //set start
 		this.parentNodes = [];
 		this.heapSize = 0;
-		this.lastInsertedNode = null;
 	}
 
 	push(data, priority) {
 		var newNode = new Node(data, priority);
 		this.insertNode(newNode);
-		this.shiftNodeUp(newNode);
+        this.shiftNodeUp(newNode);
 		this.heapSize++;
 	}
 
 	pop() {
-		if(this.root != null){
-			return this.detachRoot();
+		if(this.root){
+			this.shiftNodeDown(this.parentNodes[0]);
 		}
 	}
 
 	detachRoot() {
-		var rootNode = new Node();
-		rootNode = this.root;
-
-		this.clear();
+		const rootNode = this.root;
+		this.root = null;
 		return rootNode;
 	}
 
@@ -34,11 +31,11 @@ class MaxHeap {
 	}
 
 	size() {
-		return this.parentNodes.length;
+		return this.heapSize;
 	}
 
 	isEmpty() {
-		return this.root == null;
+		return this.root == null && !this.parentNodes[0];
 	}
 
 	clear() {
@@ -55,28 +52,40 @@ class MaxHeap {
 			this.parentNodes[0].appendChild(node);
 			this.parentNodes[this.parentNodes.length] = node;
 
-			if((this.parentNodes[0].left != null) && (this.parentNodes[0].right != null)){
+			if((this.parentNodes[0].left) && (this.parentNodes[0].right)){
 				this.parentNodes.shift();
-
-				// for( var i = 0; i < this.parentNodes.length - 1; i++ ){
-				// 	this.parentNodes[i] = this.parentNodes[i+1];
-				// }
-				// this.parentNodes.pop();
 			}
 		}
-
-
 	}
 
 	shiftNodeUp(node) {
-		if((node.parent != null) && (node.parent.data < node.data)){
-			node.swapWithParent();
-			this.shiftNodeUp(node);
+		if(node.parent){
+				var nodeIndexInParentNodes = this.parentNodes.indexOf(node);
+				if(nodeIndexInParentNodes >= 0){
+
+
+					var parentNodeIndexInParentNodes = this.parentNodes.indexOf(node.parent);
+					if(parentNodeIndexInParentNodes >= 0){
+
+						this.parentNodes[nodeIndexInParentNodes] = node.parent;
+						this.parentNodes[parentNodeIndexInParentNodes] = node;
+
+					}else
+						this.parentNodes[nodeIndexInParentNodes] = node.parent;
+				}
+				node.swapWithParent();
+				this.shiftNodeUp(node);
+		}else {
+			this.root = node;
 		}
 	}
 
 	shiftNodeDown(node) {
-		//swap with it's left or right child
+		if(node.left){
+			// this.shiftNodeUp(node.left);
+			node.left.swapWithParent();
+			this.shiftNodeDown(node);
+		}
 	}
 }
 
