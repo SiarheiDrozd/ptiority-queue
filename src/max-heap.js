@@ -60,7 +60,7 @@ class MaxHeap {
 
 	shiftNodeUp(node) {
 		if(node.parent){
-				var nodeIndexInParentNodes = this.parentNodes.indexOf(node);
+				/*var nodeIndexInParentNodes = this.parentNodes.indexOf(node);
 				if(nodeIndexInParentNodes >= 0){
 
 
@@ -72,7 +72,8 @@ class MaxHeap {
 
 					}else
 						this.parentNodes[nodeIndexInParentNodes] = node.parent;
-				}
+				}*/
+				this.swapNodeInParentNodes(node);
 				node.swapWithParent();
 				this.shiftNodeUp(node);
 		}else {
@@ -80,10 +81,55 @@ class MaxHeap {
 		}
 	}
 
+	swapNodeInParentNodes(node){
+		var nodeIndexInParentNodes = this.parentNodes.indexOf(node);
+		if(nodeIndexInParentNodes >= 0){
+
+			var parentNodeIndexInParentNodes = this.parentNodes.indexOf(node.parent);
+			if(parentNodeIndexInParentNodes >= 0){
+
+				this.parentNodes[nodeIndexInParentNodes] = node.parent;
+				this.parentNodes[parentNodeIndexInParentNodes] = node;
+
+			}else
+				this.parentNodes[nodeIndexInParentNodes] = node.parent;
+		}
+	}
+
 	shiftNodeDown(node) {
 		if(node.left){
-			// this.shiftNodeUp(node.left);
-			node.left.swapWithParent();
+			// if(node.left.left){
+				/*var nodeIndexInParentNodes = this.parentNodes.indexOf(node.left);
+				if(nodeIndexInParentNodes >= 0){
+
+
+					var parentNodeIndexInParentNodes = this.parentNodes.indexOf(node.left.parent);
+					if(parentNodeIndexInParentNodes >= 0){
+
+						this.parentNodes[nodeIndexInParentNodes] = node.left.parent;
+						this.parentNodes[parentNodeIndexInParentNodes] = node.left;
+
+					}else
+						this.parentNodes[nodeIndexInParentNodes] = node.left.parent;
+				}*/
+				this.swapNodeInParentNodes(node.left);
+				node.left.swapWithParent();
+		// 	}else if(node.right){
+		// 		var nodeIndexInParentNodes = this.parentNodes.indexOf(node.right);
+		// 		if(nodeIndexInParentNodes >= 0){
+        //
+        //
+		// 			var parentNodeIndexInParentNodes = this.parentNodes.indexOf(node.right.parent);
+		// 			if(parentNodeIndexInParentNodes >= 0){
+        //
+		// 				this.parentNodes[nodeIndexInParentNodes] = node.right.parent;
+		// 				this.parentNodes[parentNodeIndexInParentNodes] = node.right;
+        //
+		// 			}else
+		// 				this.parentNodes[nodeIndexInParentNodes] = node.right.parent;
+		// 		}
+		// 		node.right.swapWithParent()
+		// }
 			this.shiftNodeDown(node);
 		}
 	}
