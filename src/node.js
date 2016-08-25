@@ -38,7 +38,9 @@ class Node {
 
 	swapWithParent() {
 		if(this.parent) { //if parent exist then swapping
+
 			var nodeParent = this.parent;
+			// document.write("<br> swapWithParent() called ");
 
 			/*if parent node has parent*/
 			if(nodeParent.parent) {
@@ -46,8 +48,10 @@ class Node {
 				nodeGrandParent.removeChild(nodeParent);
 				nodeParent.removeChild(this);
 				nodeGrandParent.appendChild(this);
+				// document.write("grandparent");
 			}else{
 				nodeParent.removeChild(this);
+				// document.write("no grandparent");
 			}
 
 			var bufferNode = new Node(nodeParent.data, nodeParent.priority);
