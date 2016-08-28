@@ -1,4 +1,4 @@
 const MaxHeap = require('./src/max-heap');
+h = new MaxHeap();
 
-const h = new MaxHeap();
 window.h = h;
