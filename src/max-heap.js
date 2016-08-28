@@ -44,7 +44,6 @@ class MaxHeap {
 
 	/*removes root node and removes it from parentNodes if exist*/
 	detachRoot() {
-		// document.write("<br>detachroot()");
 		const rootNode = this.root;
 		var rootInParentsNodes = this.parentNodes.indexOf(rootNode);
 		if(rootInParentsNodes >= 0)
@@ -59,7 +58,6 @@ class MaxHeap {
 
 	/*uses last added node as root*/
 	restoreRootFromLastInsertedNode(detached) {
-		// document.write("<br>restoreRootFromLastInsertedNode()");
 		if (this.parentNodes[0]) {
 			var lastInsertedNode = this.parentNodes.pop();
 			if(lastInsertedNode.parent)
@@ -84,12 +82,7 @@ class MaxHeap {
 			this.root.parent = null;
 
 			if(!this.root.left || !this.root.right){
-				// document.write("<br>parentNodes.unshift()");
 				this.parentNodes.unshift(this.root); //inserting in parentNOdes if has empty child
-				// document.write(" ");
-				// for (var i = 0; i < this.parentNodes.length; i++) {
-				// 	document.write(" " + this.parentNodes[i].data);
-				// }
 			}
 		}
 	}
@@ -99,10 +92,6 @@ class MaxHeap {
 	}
 
 	isEmpty() {
-		// if(this.heapSize == 0)
-		// 	return true;
-		// else
-		// 	return false;
 		return (this.root == null && !this.parentNodes[0]);
 	}
 
@@ -138,12 +127,6 @@ class MaxHeap {
 	}
 
 	swapNodeInParentNodes(node){
-		// document.write("<br>swapNodeInParentNodes()");
-		// document.write("<br>swapNodeInParentNodes() elements before:");
-		// for (var i = 0; i < this.parentNodes.length; i++) {
-		// 	document.write(" " + this.parentNodes[i].data);
-		// };
-
 		var nodeIndexInParentNodes = this.parentNodes.indexOf(node);
 		if(nodeIndexInParentNodes >= 0){
 
@@ -154,21 +137,16 @@ class MaxHeap {
 				this.parentNodes[parentNodeIndexInParentNodes] = node;
 
 			}else{
-				// document.write("<br>only current node in parent nodes");
 				this.parentNodes[nodeIndexInParentNodes] = node.parent;
 			}
 		}
 	}
 
 	shiftNodeDown(node) {
-		// document.write("<br>shift node down called");
-
 		if(node.left && (node.priority < node.left.priority)) {
 			if(!node.parent){
 				this.root = node.left;
 			}
-			// document.write("<br> shift node down: node(" + node.priority + ") left priority " + node.left.priority);
-
 			this.swapNodeInParentNodes(node.left);
 			node.left.swapWithParent();
 
@@ -178,8 +156,6 @@ class MaxHeap {
 			if(!node.parent){
 				this.root = node.right;
 			}
-			// document.write("<br> shift node down: node(" + node.priority + ") right priority " + node.right.priority);
-
 			this.swapNodeInParentNodes(node.right);
 			node.right.swapWithParent();
 
